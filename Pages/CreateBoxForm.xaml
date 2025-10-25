@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FastQuizMAUI.Pages.CreateBoxForm"
+             xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             Title="CreateBoxForm">
+    <Border 
+        VerticalOptions="Center"
+        Margin="20"
+        Stroke="Black"
+        StrokeShape="RoundRectangle 15"
+        BackgroundColor="White">
+        <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20">
+            <VerticalStackLayout>
+                <Label 
+                    Text="Box Name"
+                    FontSize="20"/>
+                <Entry 
+                    BackgroundColor="Beige"
+                    FontSize="18"
+                    Text="{Binding BoxName}"/>
+                <Label Text="You must enter a name"
+                       IsVisible="{Binding IsNameIncorrect}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                    Text="Description"
+                    FontSize="20"/>
+                <Editor 
+                    BackgroundColor="Beige"
+                    FontSize="18"
+                    AutoSize="TextChanges"
+                    Text="{Binding BoxDescription}"/>
+            </VerticalStackLayout>
+            <Grid ColumnDefinitions=".5*, .5*">
+                <Button
+                    x:Name="btnSave"
+                    Grid.Column="0"
+                    Text="Save"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    CornerRadius="30"
+                    BackgroundColor="MediumSeaGreen"
+                    Command="{Binding CreateBoxCommand}"/>
+                <Button
+                    x:Name="btnCancel"
+                    Grid.Column="1"
+                    Text="Cancel"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    CornerRadius="30"
+                    BackgroundColor="IndianRed"
+                    Clicked="btnCancel_Clicked"/>
+
+            </Grid>
+            
+        </VerticalStackLayout>
+        <Border.Shadow>
+            <Shadow 
+                Brush="Black"
+                Opacity="0.4"
+                Radius="15"
+                />
+        </Border.Shadow>
+    </Border>
+
+</ContentPage>
