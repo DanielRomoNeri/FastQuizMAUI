@@ -20,19 +20,45 @@
                 Clicked="btnNewBox_Clicked"/>
             <CollectionView ItemsSource="{Binding Boxes}" Grid.Row="1">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Span="2" Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
+                    <GridItemsLayout Span="2" 
+                                     Orientation="Vertical" 
+                                     HorizontalItemSpacing="10" 
+                                     VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:BoxModel">
-                        <Border>
-                            <VerticalStackLayout>
+                        <Border StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1"
+                                Stroke="LightGray"
+                                BackgroundColor="White"
+                                Padding="0">
+
+                            <Border.Shadow>
+                                <Shadow Brush="Black" 
+                                        Offset="5,5" 
+                                        Radius="10" 
+                                        Opacity="0.2" />
+                            </Border.Shadow>
+
+                            <VerticalStackLayout Spacing="0">
+
                                 <Label Text="{Binding BoxName}"
                                        HorizontalOptions="Center"
                                        FontSize="20"
-                                       FontAttributes="Bold"/>
-                                <Border>
-                                    <Label Text="{Binding BoxDescription}"/>
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource Primary}"
+                                       Padding="15,15,15,10"/>      
+                                <Border BackgroundColor="#F7F7F7"
+                                        StrokeThickness="0"
+                                        Padding="15"
+                                        StrokeShape="RoundRectangle 0,0,10,10">
+
+                                    <Label Text="{Binding BoxDescription}"
+                                           HorizontalOptions="Center"
+                                           TextColor="Gray"
+                                           FontSize="14"/>
                                 </Border>
+
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>

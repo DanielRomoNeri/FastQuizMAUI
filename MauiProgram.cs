@@ -22,10 +22,10 @@ namespace FastQuizMAUI
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<DatabaseService>()
-                .AddSingleton<MainPage>()
-                .AddSingleton<MainPageVM>()
-                .AddSingleton<CreateBoxForm>()
-                .AddSingleton<CreateBoxFormVM>();
+                .AddTransient<MainPage>()
+                .AddTransient<MainPageVM>()
+                .AddTransient<CreateBoxForm>()
+                .AddTransient<CreateBoxFormVM>();
             return builder.Build();
         }
     }
