@@ -13,6 +13,11 @@ public partial class CreateBoxForm : ContentPage
         BindingContext = _createBoxFormVM;
 
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _createBoxFormVM.GetCategories();
+    }
     private async void CloseForm()
     {
         await Navigation.PopModalAsync();

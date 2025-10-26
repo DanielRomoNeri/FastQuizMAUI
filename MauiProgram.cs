@@ -25,7 +25,10 @@ namespace FastQuizMAUI
                 .AddTransient<MainPage>()
                 .AddTransient<MainPageVM>()
                 .AddTransient<CreateBoxForm>()
-                .AddTransient<CreateBoxFormVM>();
+                .AddTransient<CreateBoxFormVM>()
+                .AddTransient<InsideBoxPage>()
+                .AddTransient<InsideBoxVM>()
+                .AddTransient<AddItemForm>();
             return builder.Build();
         }
     }

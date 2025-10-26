@@ -10,5 +10,6 @@ namespace FastQuizMAUI.Models
         [MaxLength(100), Unique]
         public string BoxName { get; set; }
         public string BoxDescription { get; set; }
+        public int BoxCategoryId { get; set; }
     }
 }

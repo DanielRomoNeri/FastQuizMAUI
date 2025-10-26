@@ -4,6 +4,7 @@
              x:Class="FastQuizMAUI.Pages.CreateBoxForm"
              xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
              xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             x:DataType="vm:CreateBoxFormVM"
              Title="CreateBoxForm">
     <Border 
         VerticalOptions="Center"
@@ -20,8 +21,12 @@
                     BackgroundColor="Beige"
                     FontSize="18"
                     Text="{Binding BoxName}"/>
-                <Label Text="You must enter a name"
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="IndianRed"
                        IsVisible="{Binding IsNameIncorrect}"/>
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="IndianRed"
+                       IsVisible="{Binding IsNameRepeated}"/>
             </VerticalStackLayout>
             <VerticalStackLayout>
                 <Label 
@@ -32,6 +37,21 @@
                     FontSize="18"
                     AutoSize="TextChanges"
                     Text="{Binding BoxDescription}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                        Text="Category"
+                        FontSize="20"/>
+                
+                <Picker Title="Select a category"
+                        HorizontalTextAlignment="Center"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}"
+                        ItemDisplayBinding="{Binding Category}"
+                        FontSize="18"/>
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="IndianRed"
+                       IsVisible="{Binding IsCategoryNotSelected}"/>
             </VerticalStackLayout>
             <Grid ColumnDefinitions=".5*, .5*">
                 <Button
