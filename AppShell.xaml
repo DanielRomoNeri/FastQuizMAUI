@@ -6,11 +6,11 @@
     xmlns:local="clr-namespace:FastQuizMAUI"
     xmlns:pages="clr-namespace:FastQuizMAUI.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False"
+    Shell.NavBarIsVisible="True"
     Title="FastQuizMAUI">
 
     <ShellContent
-        Title="Home"
+        Title="Box Selection"
         ContentTemplate="{DataTemplate pages:MainPage}"
         Route="MainPage" />
 

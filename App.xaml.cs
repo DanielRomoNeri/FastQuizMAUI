@@ -11,10 +11,7 @@ namespace FastQuizMAUI
             _databaseService = databaseService;
             MainPage = new AppShell();
         }
-        protected override async void OnStart()
-        {
-            base.OnStart();
-            await _databaseService.InitAsync();
-        }
+
+
     }
 }
