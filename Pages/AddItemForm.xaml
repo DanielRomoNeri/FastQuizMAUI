@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FastQuizMAUI.Pages.AddItemForm"
+             Title="AddItemForm">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Border  Grid.Row="0"
+                 VerticalOptions="Center"
+                 Margin="20"
+                 Stroke="Black"
+                 StrokeShape="RoundRectangle 15"
+                 BackgroundColor="White">
+            <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20">
+                <VerticalStackLayout>
+                    <Label 
+                            Text="Front text"
+                            FontSize="20"/>
+                    <Entry 
+                            BackgroundColor="Beige"
+                            FontSize="18"/>
+
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label 
+                            Text="Back text"
+                            FontSize="20"/>
+                    <Entry 
+                        BackgroundColor="Beige"
+                        FontSize="18"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label 
+                            Text="Context"
+                            FontSize="20"/>
+                    <Entry 
+                        BackgroundColor="Beige"
+                        FontSize="18"/>
+                </VerticalStackLayout>
+
+
+            </VerticalStackLayout>
+            <Border.Shadow>
+                <Shadow 
+             Brush="Black"
+             Opacity="0.4"
+             Radius="15"
+             />
+            </Border.Shadow>
+        </Border>
+
+    </Grid>
+   
+</ContentPage>

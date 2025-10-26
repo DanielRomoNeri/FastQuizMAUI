@@ -16,34 +16,57 @@ namespace FastQuizMAUI.Services
         public async Task InitAsync()
         {
 
-            // Ahora crea tus tablas
             await _database.CreateTableAsync<BoxModel>();
             await _database.CreateTableAsync<ItemsBoxModel>();
-            // ... (y tus otras tablas como ItemsBoxModel)
+            await _database.CreateTableAsync<BoxCategoryModel>();
+            //await _database.DropTableAsync<BoxModel>();
+            //await _database.DropTableAsync<ItemsBoxModel>();
+            //await _database.DropTableAsync<BoxCategoryModel>();
+
+            await SeedDataAsync();
         }
-        public Task<BoxModel[]> GetBoxesAsync()
+        private async Task SeedDataAsync()
         {
-            return _database.Table<BoxModel>().ToArrayAsync();
+            var firstCategory = await _database.Table<BoxCategoryModel>().FirstOrDefaultAsync();
+            if (firstCategory != null)
+            {
+                return; // Los datos ya existen, no es necesario sembrar
+            }
+
+            List<BoxCategoryModel> itemsCategories = new List<BoxCategoryModel>
+            {
+                new BoxCategoryModel { Category = "Definition" },
+                new BoxCategoryModel { Category = "Translation" },
+                new BoxCategoryModel { Category = "Other" },
+            };
+            await _database.InsertAllAsync(itemsCategories);
+        }
+        public async Task<BoxModel[]> GetBoxesAsync()
+        {
+            return await _database.Table<BoxModel>().ToArrayAsync();
         }
         // Guardar (Insertar o Actualizar) un item
-        public Task<int> SaveBoxAsync(BoxModel box)
+        public async Task<int> SaveBoxAsync(BoxModel box)
         {
             if (box.Id != 0)
             {
                 // Actualizar (Update)
-                return _database.UpdateAsync(box);
+                return await _database.UpdateAsync(box);
             }
             else
             {
                 // Insertar (Insert)
-                return _database.InsertAsync(box);
+                return await _database.InsertAsync(box);
             }
         }
-        //public Task<List<ItemsBoxModel>> GetItemsAsync()
-        //{
-        //    return _database.Table<ItemsBoxModel>().ToListAsync();
-        //}
-
+        public async Task<List<ItemsBoxModel>> GetItemsAsync(int boxId)
+        {
+            return await _database.Table<ItemsBoxModel>().Where(i => i.BoxId == boxId).ToListAsync();
+        }
+        public async Task<List<BoxCategoryModel>> GetBoxCategoriesAsync()
+        {
+            return await _database.Table<BoxCategoryModel>().ToListAsync();
+        }
         //// Obtener un item por ID
         //public Task<ItemsBoxModel> GetItemAsync(int id)
         //{

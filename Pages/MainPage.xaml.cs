@@ -5,24 +5,28 @@ namespace FastQuizMAUI.Pages
 {
     public partial class MainPage : ContentPage
     {
-        private readonly CreateBoxForm _createBoxForm;
+        private readonly IServiceProvider _serviceProvider;
         private readonly MainPageVM _mainPageVM;
 
-        public MainPage(CreateBoxForm createBoxForm, MainPageVM mainPageVM)
+        public MainPage(IServiceProvider serviceProvider, MainPageVM mainPageVM)
         {
             InitializeComponent();
-            _createBoxForm = createBoxForm;
+            _serviceProvider = serviceProvider;
             _mainPageVM = mainPageVM;
             BindingContext = _mainPageVM;
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await _mainPageVM.LoadBoxesAsync();
+            await _mainPageVM.InitAsync();
+
+
         }
+
         private async void btnNewBox_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(_createBoxForm);
+            var page = _serviceProvider.GetRequiredService<CreateBoxForm>();
+            await Navigation.PushModalAsync(page);
         }
     }
 
