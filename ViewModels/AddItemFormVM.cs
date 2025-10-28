@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FastQuizMAUI.Helpers;
 using FastQuizMAUI.Models;
 using FastQuizMAUI.Services;
 
@@ -20,6 +21,7 @@ namespace FastQuizMAUI.ViewModels
             _databaseService = databaseService;
         }
 
+        public EventHandler RequestUnfocus;
         public ObservableCollection<ItemsBoxModel> ItemsList { get; set; } = new();
 
         [ObservableProperty]
@@ -56,7 +58,10 @@ namespace FastQuizMAUI.ViewModels
 
             ItemsList.Add(Item);
             Item = new ItemsBoxModel();
-            
+            RequestUnfocus.Invoke(this, new EventArgs());
+            KeyboardHelper.HideKeyboard();
+
+
         }
 
         [RelayCommand]

@@ -13,12 +13,14 @@
           BackgroundColor="White">
         <Grid RowDefinitions="Auto,*,Auto">
 
-            <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20">
+            <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20,0,0">
                 <VerticalStackLayout>
                     <Label 
+                            
                             Text="Front text"
                             FontSize="20"/>
                     <Entry 
+                            x:Name="tbFrontText"
                             Text="{Binding Item.FrontText}"
                             BackgroundColor="Beige"
                             FontSize="18"/>
@@ -29,6 +31,7 @@
                             Text="Back text"
                             FontSize="20"/>
                     <Entry 
+                            x:Name="tbBackText"
                             Text="{Binding Item.BackText}"
                             BackgroundColor="Beige"
                             FontSize="18"/>
@@ -38,6 +41,7 @@
                             Text="Context (optional)"
                             FontSize="20"/>
                     <Entry 
+                        x:Name="tbContext"
                         Text="{Binding Item.Context}"
                         BackgroundColor="Beige"
                         FontSize="18"/>
@@ -61,38 +65,41 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:ItemsBoxModel">
-                        <SwipeView>
+                        <SwipeView Threshold="170">
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
-                                    <SwipeItem Text="Remove"
+                                    <SwipeItem IconImageSource="trash_solid_white.svg"
                                                BackgroundColor="Red"
                                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:AddItemFormVM}}, Path=DeleteItemFromListCommand}"
                                                CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
-                            <Border StrokeShape="RoundRectangle 10"
+                            <Border Grid.Column="0"
+                                    StrokeShape="RoundRectangle 10"
                                     StrokeThickness="1"
                                     Stroke="CornflowerBlue"
                                     BackgroundColor="White"
-                                    Padding="10"
-                                    Margin="0,5">
-                                <Grid RowDefinitions="Auto, Auto, Auto">
+                                    Padding="20,5"
+                                    Margin="20,3">
+                                <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="5">
                                     <Label Grid.Row="0"
-                                           Text="{Binding FrontText}"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="{StaticResource Primary}"/>
+                                            Text="{Binding FrontText}"
+                                            FontSize="15"
+                                            FontAttributes="Bold"
+                                            TextColor="{StaticResource Primary}"/>
                                     <Border Grid.Row="1"
                                             Stroke="Black"
                                             StrokeDashArray="20, 5"
                                             StrokeThickness="0.5"/>
                                     <Label Grid.Row="2"
-                                           Text="{Binding BackText}"
-                                           FontSize="16"
-                                           TextColor="Gray"/>
+                                            Text="{Binding BackText}"
+                                            FontSize="13"
+                                            TextColor="Gray"/>
                                 </Grid>
                             </Border>
+
+
                         </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -108,7 +115,7 @@
                          x:Name="btnCancel"
                          Grid.Column="0"
                          Text="Cancel"
-                         FontSize="20"
+                         FontSize="15"
                          HorizontalOptions="Center"
                          CornerRadius="30"
                          BackgroundColor="IndianRed"/>
@@ -116,10 +123,10 @@
                          x:Name="btnSave"
                          Grid.Column="1"
                          Text="Finish"
-                         FontSize="20"
+                         FontSize="15"
                          HorizontalOptions="Center"
                          CornerRadius="30"
-                        Padding="40,0"
+                        Padding="20,0"
                          BackgroundColor="MediumSeaGreen"
                         Command="{Binding AddItemstoDBCommand}"/>
 

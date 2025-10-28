@@ -10,6 +10,14 @@ public partial class AddItemForm : ContentPage
 	{
 		InitializeComponent();
         _addItemFormVM = addItemFormVM;
+        _addItemFormVM.RequestUnfocus += UnfocusEdition;
         BindingContext = _addItemFormVM;
+    }
+
+    private void UnfocusEdition(object sender, EventArgs e)
+    {
+        tbFrontText.Unfocus();
+        tbBackText.Unfocus();
+        tbContext.Unfocus();
     }
 }
