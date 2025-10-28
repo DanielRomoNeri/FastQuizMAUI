@@ -55,23 +55,24 @@
             </VerticalStackLayout>
             <Grid ColumnDefinitions=".5*, .5*">
                 <Button
-                    x:Name="btnSave"
-                    Grid.Column="0"
-                    Text="Save"
-                    FontSize="20"
-                    HorizontalOptions="Center"
-                    CornerRadius="30"
-                    BackgroundColor="MediumSeaGreen"
-                    Command="{Binding CreateBoxCommand}"/>
-                <Button
                     x:Name="btnCancel"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     Text="Cancel"
                     FontSize="20"
                     HorizontalOptions="Center"
                     CornerRadius="30"
                     BackgroundColor="IndianRed"
                     Clicked="btnCancel_Clicked"/>
+                <Button
+                    x:Name="btnSave"
+                    Grid.Column="1"
+                    Text="Save"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    CornerRadius="30"
+                    BackgroundColor="MediumSeaGreen"
+                    Command="{Binding CreateBoxCommand}"/>
+                
 
             </Grid>
             

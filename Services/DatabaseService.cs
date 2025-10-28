@@ -75,20 +75,25 @@ namespace FastQuizMAUI.Services
         //                    .FirstOrDefaultAsync();
         //}
 
-        //// Guardar (Insertar o Actualizar) un item
-        //public Task<int> SaveItemAsync(ItemsBoxModel item)
-        //{
-        //    if (item.Id != 0)
-        //    {
-        //        // Actualizar (Update)
-        //        return _database.UpdateAsync(item);
-        //    }
-        //    else
-        //    {
-        //        // Insertar (Insert)
-        //        return _database.InsertAsync(item);
-        //    }
-        //}
+        // Guardar (Insertar o Actualizar) un item
+        public Task<int> SaveItemAsync(ItemsBoxModel item)
+        {
+            if (item.Id != 0)
+            {
+                // Actualizar (Update)
+                return _database.UpdateAsync(item);
+            }
+            else
+            {
+                // Insertar (Insert)
+                return _database.InsertAsync(item);
+            }
+        }
+
+        public Task<int> SaveItemsListAsync(ItemsBoxModel[] items)
+        {
+            return _database.InsertAllAsync(items);
+        }
 
         //// Borrar un item
         //public Task<int> DeleteItemAsync(ItemsBoxModel item)

@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             x:DataType="vm:AddItemFormVM"
              x:Class="FastQuizMAUI.Pages.AddItemForm"
              Title="AddItemForm">
-    <Grid RowDefinitions="Auto,*,Auto">
-        <Border  Grid.Row="0"
-                 VerticalOptions="Center"
-                 Margin="20"
-                 Stroke="Black"
-                 StrokeShape="RoundRectangle 15"
-                 BackgroundColor="White">
+    <Border 
+          Margin="20"
+          Stroke="Black"
+          StrokeShape="RoundRectangle 15"
+          BackgroundColor="White">
+        <Grid RowDefinitions="Auto,*,Auto">
+
             <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20">
                 <VerticalStackLayout>
                     <Label 
                             Text="Front text"
                             FontSize="20"/>
                     <Entry 
+                            Text="{Binding Item.FrontText}"
                             BackgroundColor="Beige"
                             FontSize="18"/>
 
@@ -25,29 +29,110 @@
                             Text="Back text"
                             FontSize="20"/>
                     <Entry 
-                        BackgroundColor="Beige"
-                        FontSize="18"/>
+                            Text="{Binding Item.BackText}"
+                            BackgroundColor="Beige"
+                            FontSize="18"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label 
-                            Text="Context"
+                            Text="Context (optional)"
                             FontSize="20"/>
                     <Entry 
+                        Text="{Binding Item.Context}"
                         BackgroundColor="Beige"
                         FontSize="18"/>
                 </VerticalStackLayout>
-
-
+                <Button ImageSource="plus_white.png"
+                         Margin="30,10,30,10"
+                         CornerRadius="20"
+                         FontSize="20"
+                          Command="{Binding AddItemCommand}"/>
+                <VerticalStackLayout>
+                    <Label Text="Items added" />
+                    <Border Grid.Row="2"
+                            Stroke="Maroon"
+                            StrokeDashArray="20, 5"
+                            StrokeThickness="0.5"/>
+                </VerticalStackLayout>
             </VerticalStackLayout>
-            <Border.Shadow>
-                <Shadow 
-             Brush="Black"
-             Opacity="0.4"
-             Radius="15"
-             />
-            </Border.Shadow>
-        </Border>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding ItemsList}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ItemsBoxModel">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItem Text="Remove"
+                                               BackgroundColor="Red"
+                                               Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:AddItemFormVM}}, Path=DeleteItemFromListCommand}"
+                                               CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-    </Grid>
-   
+                            <Border StrokeShape="RoundRectangle 10"
+                                    StrokeThickness="1"
+                                    Stroke="CornflowerBlue"
+                                    BackgroundColor="White"
+                                    Padding="10"
+                                    Margin="0,5">
+                                <Grid RowDefinitions="Auto, Auto, Auto">
+                                    <Label Grid.Row="0"
+                                           Text="{Binding FrontText}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource Primary}"/>
+                                    <Border Grid.Row="1"
+                                            Stroke="Black"
+                                            StrokeDashArray="20, 5"
+                                            StrokeThickness="0.5"/>
+                                    <Label Grid.Row="2"
+                                           Text="{Binding BackText}"
+                                           FontSize="16"
+                                           TextColor="Gray"/>
+                                </Grid>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <VerticalStackLayout Grid.Row="2" Padding="50,5" Spacing="15" Margin="0,20">
+                <Border Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Stroke="Maroon"
+                        StrokeDashArray="20, 5"
+                        StrokeThickness="0.5"/>
+                <Grid ColumnDefinitions=".5*, .5*">
+                    <Button
+                         x:Name="btnCancel"
+                         Grid.Column="0"
+                         Text="Cancel"
+                         FontSize="20"
+                         HorizontalOptions="Center"
+                         CornerRadius="30"
+                         BackgroundColor="IndianRed"/>
+                    <Button
+                         x:Name="btnSave"
+                         Grid.Column="1"
+                         Text="Finish"
+                         FontSize="20"
+                         HorizontalOptions="Center"
+                         CornerRadius="30"
+                        Padding="40,0"
+                         BackgroundColor="MediumSeaGreen"
+                        Command="{Binding AddItemstoDBCommand}"/>
+
+
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+        <Border.Shadow>
+            <Shadow 
+                     Brush="Black"
+                     Opacity="0.4"
+                     Radius="15"/>
+        </Border.Shadow>
+    </Border>
+
 </ContentPage>
