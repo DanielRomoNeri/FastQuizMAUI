@@ -6,7 +6,7 @@
              x:DataType="vm:MainPageVM"
              x:Class="FastQuizMAUI.Pages.MainPage">
 
-        <Grid RowDefinitions="Auto, *, Auto" Padding="5,0">
+        <Grid RowDefinitions="Auto, *, Auto" Padding="10,0">
             <Border Grid.Row="0"
                     StrokeShape="RoundRectangle 20"
                     Margin="20,10,20,10">
@@ -67,6 +67,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
             <Button 
                     x:Name="btnNewBox"
                     Grid.Row="2"

@@ -13,13 +13,20 @@ public partial class InsideBoxPage : ContentPage
 	{
 		InitializeComponent();
         _insideBoxVM = insideBoxVM;
+        _insideBoxVM.RequestOpenForm += OpenForm;
         _serviceProvider = serviceProvider;
         BindingContext = _insideBoxVM;
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _insideBoxVM.InitAsync();
 
-    private async void btnNewItem_Clicked(object sender, EventArgs e)
+    }
+    private async void OpenForm(object s, EventArgs e)
     {
         var page = _serviceProvider.GetRequiredService<AddItemForm>();
+        page.BoxId = _insideBoxVM.BoxToDisplay.Id;
         await Navigation.PushModalAsync(page);
     }
 }

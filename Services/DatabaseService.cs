@@ -15,12 +15,12 @@ namespace FastQuizMAUI.Services
 
         public async Task InitAsync()
         {
-
+            //await _database.DropTableAsync<BoxModel>();
+            //await _database.DropTableAsync<ItemsBoxModel>();
             await _database.CreateTableAsync<BoxModel>();
             await _database.CreateTableAsync<ItemsBoxModel>();
             await _database.CreateTableAsync<BoxCategoryModel>();
-            //await _database.DropTableAsync<BoxModel>();
-            //await _database.DropTableAsync<ItemsBoxModel>();
+
             //await _database.DropTableAsync<BoxCategoryModel>();
 
             await SeedDataAsync();
@@ -45,7 +45,7 @@ namespace FastQuizMAUI.Services
         {
             return await _database.Table<BoxModel>().ToArrayAsync();
         }
-        // Guardar (Insertar o Actualizar) un item
+        //Guardar(Insertar o Actualizar) un item
         public async Task<int> SaveBoxAsync(BoxModel box)
         {
             if (box.Id != 0)
@@ -59,9 +59,9 @@ namespace FastQuizMAUI.Services
                 return await _database.InsertAsync(box);
             }
         }
-        public async Task<List<ItemsBoxModel>> GetItemsAsync(int boxId)
+        public async Task<ItemsBoxModel[]> GetItemsAsync(int boxId)
         {
-            return await _database.Table<ItemsBoxModel>().Where(i => i.BoxId == boxId).ToListAsync();
+            return await _database.Table<ItemsBoxModel>().Where(i => i.BoxId == boxId).ToArrayAsync();
         }
         public async Task<List<BoxCategoryModel>> GetBoxCategoriesAsync()
         {

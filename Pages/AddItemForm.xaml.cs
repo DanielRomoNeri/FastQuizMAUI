@@ -10,14 +10,31 @@ public partial class AddItemForm : ContentPage
 	{
 		InitializeComponent();
         _addItemFormVM = addItemFormVM;
-        _addItemFormVM.RequestUnfocus += UnfocusEdition;
+        _addItemFormVM.RequestHideKeyboard += (s, e) => HideKeyboard();
+        _addItemFormVM.RequestCloseForm += (s, e) => CloseForm();
         BindingContext = _addItemFormVM;
     }
 
-    private void UnfocusEdition(object sender, EventArgs e)
+    public int BoxId { set; get; }
+
+    protected override void OnAppearing()
     {
-        tbFrontText.Unfocus();
-        tbBackText.Unfocus();
-        tbContext.Unfocus();
+        base.OnAppearing();
+        _addItemFormVM.SetBoxId(BoxId);
+    }
+
+    private void HideKeyboard()
+    {
+        //In order to hide keyboard the TextBoxes must be disabled and enabled again
+        tbFrontText.IsEnabled = false;
+        tbBackText.IsEnabled = false;
+        tbContext.IsEnabled = false;
+        tbFrontText.IsEnabled = true;
+        tbBackText.IsEnabled = true;
+        tbContext.IsEnabled = true;
+    }
+    private async void CloseForm()
+    {
+        await Navigation.PopModalAsync();
     }
 }

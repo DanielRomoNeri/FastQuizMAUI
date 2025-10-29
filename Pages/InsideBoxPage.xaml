@@ -2,27 +2,86 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             xmlns:converter="clr-namespace:FastQuizMAUI.Converters"
              x:Class="FastQuizMAUI.Pages.InsideBoxPage"
              x:DataType="vm:InsideBoxVM"
              Title="Inside Box">
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CircleIconLevelConverter x:Key="CircleIconLevelConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto, Auto, *, Auto" RowSpacing="5" Padding="10,0">
         <Label  Grid.Row="0" 
                 Text="{Binding BoxToDisplay.BoxName}"
                 VerticalOptions="Center" 
                 HorizontalTextAlignment="Center"
                 FontSize="20"
                 FontAttributes="Bold"/>
-        <Button 
-                x:Name="btnNewItem"
-                Grid.Row="3"
-                ImageSource="plus_white.svg" 
-                Text="Add New Item"
-                Margin="30,10,30,10"
-                CornerRadius="20"
-                FontSize="20"
-                Clicked="btnNewItem_Clicked"/>
-        
+        <CollectionView Grid.Row="2" ItemsSource="{Binding ItemsInBox}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Span="3" Orientation="Vertical" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ItemsBoxModel">
+
+                    <Border Stroke="{StaticResource Primary}" StrokeShape="RoundRectangle 15"
+                            StrokeThickness="2"
+                            Padding="5"
+                            BackgroundColor="#2c3e50" 
+                            MinimumHeightRequest="120"
+                            MaximumHeightRequest="120">
+
+                        <Grid RowDefinitions=".5*,.5*" RowSpacing="3">
+                            <Image Source="{Binding Level, Converter={StaticResource CircleIconLevelConverter}}" 
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="End" 
+                                   HeightRequest="15"/>
+
+                            <Label Grid.Row="0"
+                                   Margin="0,12"
+                                   Text="{Binding FrontText}"
+                                   TextColor="White" 
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="12"
+                                   FontAttributes="Bold"/>
+                            <Label Grid.Row="1"
+                                   Text="{Binding BackText}"
+                                   TextColor="Gainsboro"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="12"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Grid ColumnDefinitions="*, Auto" Grid.Row="3" Padding="20, 10">
+
+            <Button Grid.Column="0"
+            Text="Start Quiz"
+            TextColor="White" 
+            BackgroundColor="#1E90FF"  
+            CornerRadius="30"        
+            FontSize="20"            
+            FontAttributes="Bold"    
+            Margin="0,0,15,0"        
+            BorderColor="#1C86EE"    
+            BorderWidth="2"/>
+            <Button Grid.Column="1"
+            ImageSource="plus_white.svg"
+            CornerRadius="15"          
+            WidthRequest="60"           
+            Margin="15,0,0,0"          
+            BorderColor="#218838"      
+            BorderWidth="2"           
+            Command="{Binding OpenAddItemFormCommand}"/>
+        </Grid>
+
+
     </Grid>
         
 </ContentPage>

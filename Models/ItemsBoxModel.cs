@@ -11,7 +11,7 @@ namespace FastQuizMAUI.Models
         [MaxLength(250)]
         public string BackText { get; set; }
         public string Context{ get; set; }
-        public double Level { get; set; }
+        public int Level { get; set; }
         public int BoxId { get; set; }
     }
 }

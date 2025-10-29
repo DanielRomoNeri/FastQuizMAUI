@@ -21,7 +21,8 @@ namespace FastQuizMAUI.ViewModels
             _databaseService = databaseService;
         }
 
-        public EventHandler RequestUnfocus;
+        public EventHandler RequestHideKeyboard;
+        public EventHandler RequestCloseForm;
         public ObservableCollection<ItemsBoxModel> ItemsList { get; set; } = new();
 
         [ObservableProperty]
@@ -33,8 +34,15 @@ namespace FastQuizMAUI.ViewModels
         [ObservableProperty]
         private bool _isBackTextFieldEmpty = false;
 
+        private int boxId;
+
+        public void SetBoxId(int id)
+        {
+            boxId = id;
+        }
+
         [RelayCommand]
-        private async Task AddItem()
+        private void AddItemToView()
         {
             if (string.IsNullOrWhiteSpace(Item.FrontText))
             {
@@ -55,11 +63,10 @@ namespace FastQuizMAUI.ViewModels
                 IsBackTextFieldEmpty = false;
             }
 
-
+            Item.BoxId = boxId;
             ItemsList.Add(Item);
             Item = new ItemsBoxModel();
-            RequestUnfocus.Invoke(this, new EventArgs());
-            KeyboardHelper.HideKeyboard();
+            RequestHideKeyboard.Invoke(this, EventArgs.Empty);
 
 
         }
@@ -69,6 +76,7 @@ namespace FastQuizMAUI.ViewModels
         {
 
             int result = await _databaseService.SaveItemsListAsync([.. ItemsList]);
+            RequestCloseForm.Invoke(this, EventArgs.Empty);
 
         }
 

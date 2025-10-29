@@ -46,11 +46,11 @@
                         BackgroundColor="Beige"
                         FontSize="18"/>
                 </VerticalStackLayout>
-                <Button ImageSource="plus_white.png"
-                         Margin="30,10,30,10"
+                <Button Text="Add"
+                         WidthRequest="250"
                          CornerRadius="20"
                          FontSize="20"
-                          Command="{Binding AddItemCommand}"/>
+                          Command="{Binding AddItemToViewCommand}"/>
                 <VerticalStackLayout>
                     <Label Text="Items added" />
                     <Border Grid.Row="2"
@@ -65,13 +65,28 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:ItemsBoxModel">
-                        <SwipeView Threshold="170">
+                        <SwipeView Threshold="100">
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
-                                    <SwipeItem IconImageSource="trash_solid_white.svg"
+                                    <!--<SwipeItem IconImageSource="trash_solid_white.svg"
                                                BackgroundColor="Red"
                                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:AddItemFormVM}}, Path=DeleteItemFromListCommand}"
-                                               CommandParameter="{Binding .}"/>
+                                               CommandParameter="{Binding .}"/>-->
+                                    <SwipeItemView Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:AddItemFormVM}}, Path=DeleteItemFromListCommand}"
+                                                   CommandParameter="{Binding .}">
+                                        <Grid RowDefinitions="*" ColumnDefinitions="*">
+                                            <Border Grid.Row="0" Grid.Column="0"
+                                                    BackgroundColor="Red"
+                                                    StrokeShape="RoundRectangle 10"
+                                                    Padding="20,0">
+                                                <Image Source="trash_icon.svg"
+                                                       HeightRequest="30"
+                                                        HorizontalOptions="End" />
+                                            </Border>
+                                        </Grid>
+                                           
+                                        
+                                    </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
@@ -85,6 +100,7 @@
                                 <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="5">
                                     <Label Grid.Row="0"
                                             Text="{Binding FrontText}"
+                                            HorizontalOptions="Center"
                                             FontSize="15"
                                             FontAttributes="Bold"
                                             TextColor="{StaticResource Primary}"/>
@@ -94,6 +110,7 @@
                                             StrokeThickness="0.5"/>
                                     <Label Grid.Row="2"
                                             Text="{Binding BackText}"
+                                            HorizontalOptions="Center"
                                             FontSize="13"
                                             TextColor="Gray"/>
                                 </Grid>
@@ -115,7 +132,7 @@
                          x:Name="btnCancel"
                          Grid.Column="0"
                          Text="Cancel"
-                         FontSize="15"
+                         FontSize="20"
                          HorizontalOptions="Center"
                          CornerRadius="30"
                          BackgroundColor="IndianRed"/>
@@ -123,7 +140,7 @@
                          x:Name="btnSave"
                          Grid.Column="1"
                          Text="Finish"
-                         FontSize="15"
+                         FontSize="20"
                          HorizontalOptions="Center"
                          CornerRadius="30"
                         Padding="20,0"
