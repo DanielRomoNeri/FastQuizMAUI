@@ -13,11 +13,11 @@ namespace FastQuizMAUI.Converters
         {
             if(value is int level)
             {
-                if (level == 0)
+                if (level != 0)
                 {
                     return "white_circle.svg";
                 }
-                else if (level > 0 && level <= 5)
+                else if (level >= 0 && level <= 5)
                 {
                     return "red_circle.svg";
                 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             x:DataType="vm:EditItemFormVM"
+             x:Class="FastQuizMAUI.Pages.EditItemForm"
+             Title="EditItemForm">
+    <Border 
+       Margin="20"
+       Stroke="Black"
+       StrokeShape="RoundRectangle 15"
+       BackgroundColor="White">
+        <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20,0,0">
+            <VerticalStackLayout>
+                <Label 
+                         
+                         Text="Front text"
+                         FontSize="20"/>
+                <Entry 
+                         x:Name="tbFrontText"
+                         Text="{Binding ItemToEdit.FrontText}"
+                         BackgroundColor="Beige"
+                         FontSize="18"/>
+
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                         Text="Back text"
+                         FontSize="20"/>
+                <Entry 
+                         x:Name="tbBackText"
+                         Text="{Binding ItemToEdit.BackText}"
+                         BackgroundColor="Beige"
+                         FontSize="18"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                         Text="Context (optional)"
+                         FontSize="20"/>
+                <Entry 
+                     x:Name="tbContext"
+                     Text="{Binding ItemToEdit.Context}"
+                     BackgroundColor="Beige"
+                     FontSize="18"/>
+            </VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Button Text="Save"
+                        Command="{Binding SaveItemCommand}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</ContentPage>

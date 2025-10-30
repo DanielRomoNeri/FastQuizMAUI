@@ -41,6 +41,16 @@ namespace FastQuizMAUI.ViewModels
         {
             RequestOpenForm?.Invoke(this, EventArgs.Empty);
         }
+
+        [RelayCommand]
+        private async Task OpenItemDetailPageAsync(ItemsBoxModel item)
+        {
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "SelectedCard", item }
+            };
+            await Shell.Current.GoToAsync(nameof(Pages.ItemDetailPage), navigationParameter);
+        }
     }
 
 }

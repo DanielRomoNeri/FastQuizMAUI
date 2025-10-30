@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             xmlns:converter="clr-namespace:FastQuizMAUI.Converters"
+             x:DataType="vm:ItemDetailVM"
+             x:Class="FastQuizMAUI.Pages.ItemDetailPage"
+             Title="ItemDetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CircleIconLevelConverter x:Key="CircleIconLevelConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto, * , Auto, Auto" Padding="20,10">
+        <HorizontalStackLayout>
+            <Image Source="{Binding ItemToDisplay.Level, Converter={StaticResource CircleIconLevelConverter}}" Margin="0,0,10,0"/>
+
+            <Label Text="{Binding ItemToDisplay.Level, StringFormat='Mastery Level: {0}/100'}" 
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"/>
+
+        </HorizontalStackLayout>
+        <Border Grid.Row="1"
+                x:Name="borderFrontCard"
+                Stroke="#5398F3"
+                StrokeThickness="3"
+                StrokeShape="RoundRectangle 20"
+                Margin="30, 50,30,50" BackgroundColor="#1140A5">
+            
+            <Label Text="{Binding ItemToDisplay.FrontText}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   TextColor="#FFFFFF"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="borderFrontCard_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <Border Grid.Row="1"
+                x:Name="borderBackCard"
+                Scale="0.5"
+                RotationY="270"
+                Stroke="#5398F3"
+                StrokeThickness="3"
+                StrokeShape="RoundRectangle 20"
+                Margin="30, 50,30,50" BackgroundColor="#1140A5"
+                IsVisible="False">
+            
+            <Label Text="{Binding ItemToDisplay.BackText}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   TextColor="#FFFFFF"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="borderBackCard_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <Label Grid.Row="2"
+               Text="{Binding ItemToDisplay.Context, StringFormat='Context: {0}'}"
+               Margin="0,0,0,80"
+               VerticalOptions="Start"
+               FontSize="15"
+               FontAttributes="Bold"/>
+        <HorizontalStackLayout Spacing="15" Grid.Row="3" Margin="0,0,0,20" >
+            <Button ImageSource="edit_icon.svg"
+                    Text="Edit"
+                    FontSize="15"
+                    FontAttributes="Bold" BackgroundColor="#0B782D" BorderColor="#3AEB64" BorderWidth="2"
+                    Command="{Binding OpenEditFormCommand}"/>
+            <Button ImageSource="trash_icon.svg"
+                    x:Name="btnDelete"
+                    Text="Delete"
+                    FontSize="15"
+                    FontAttributes="Bold" BackgroundColor="#9B1111" BorderColor="#E80000" BorderWidth="2"
+                    Command="{Binding DeleteItemCommand}"/>
+            <Button ImageSource="reset_level_icon.svg"
+            Text="Reset level"
+            FontSize="15"
+            FontAttributes="Bold" BorderWidth="2" BorderColor="#903AF0"/>
+
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
+    

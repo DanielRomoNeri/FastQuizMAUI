@@ -30,7 +30,7 @@
                     <Border Stroke="{StaticResource Primary}" StrokeShape="RoundRectangle 15"
                             StrokeThickness="2"
                             Padding="5"
-                            BackgroundColor="#2c3e50" 
+                            BackgroundColor="#1140A5" 
                             MinimumHeightRequest="120"
                             MaximumHeightRequest="120">
 
@@ -55,6 +55,10 @@
                                    VerticalTextAlignment="Center"
                                    FontSize="12"/>
                         </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:InsideBoxVM}}, Path=OpenItemDetailPageCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -76,7 +80,7 @@
             CornerRadius="15"          
             WidthRequest="60"           
             Margin="15,0,0,0"          
-            BorderColor="#218838"      
+            BorderColor="#8846DF"      
             BorderWidth="2"           
             Command="{Binding OpenAddItemFormCommand}"/>
         </Grid>
