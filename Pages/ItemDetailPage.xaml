@@ -31,6 +31,7 @@
             <Label Text="{Binding ItemToDisplay.FrontText}"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
                    FontSize="25"
                    FontAttributes="Bold"
                    TextColor="#FFFFFF"/>
@@ -52,6 +53,7 @@
             <Label Text="{Binding ItemToDisplay.BackText}"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
                    FontSize="25"
                    FontAttributes="Bold"
                    TextColor="#FFFFFF"/>
@@ -62,28 +64,39 @@
         </Border>
         <Label Grid.Row="2"
                Text="{Binding ItemToDisplay.Context, StringFormat='Context: {0}'}"
-               Margin="0,0,0,80"
+               Margin="0,0,0,50"
                VerticalOptions="Start"
                FontSize="15"
                FontAttributes="Bold"/>
-        <HorizontalStackLayout Spacing="15" Grid.Row="3" Margin="0,0,0,20" >
-            <Button ImageSource="edit_icon.svg"
-                    Text="Edit"
-                    FontSize="15"
-                    FontAttributes="Bold" BackgroundColor="#0B782D" BorderColor="#3AEB64" BorderWidth="2"
-                    Command="{Binding OpenEditFormCommand}"/>
-            <Button ImageSource="trash_icon.svg"
-                    x:Name="btnDelete"
-                    Text="Delete"
-                    FontSize="15"
-                    FontAttributes="Bold" BackgroundColor="#9B1111" BorderColor="#E80000" BorderWidth="2"
-                    Command="{Binding DeleteItemCommand}"/>
-            <Button ImageSource="reset_level_icon.svg"
-            Text="Reset level"
-            FontSize="15"
-            FontAttributes="Bold" BorderWidth="2" BorderColor="#903AF0"/>
+        <VerticalStackLayout Grid.Row="3">
+            <HorizontalStackLayout Spacing="15"  Margin="0,0,0,15" HorizontalOptions="Center">
+                <Button ImageSource="edit_icon.svg"
+                        Text="Edit"
+                        FontSize="15"
+                        FontAttributes="Bold" BackgroundColor="#0B782D" BorderColor="#3AEB64" BorderWidth="2"
+                        Command="{Binding OpenEditFormCommand}"/>
+                <Button ImageSource="edit_icon.svg"
+                         Text="Disable"
+                         FontSize="15"
+                         FontAttributes="Bold" BackgroundColor="#3F3F3F" BorderColor="#575757" BorderWidth="2"
+                         Command="{Binding OpenEditFormCommand}"/>
 
-        </HorizontalStackLayout>
+                <Button ImageSource="reset_level_icon.svg"
+                        Text="Reset"
+                        FontSize="15"
+                        FontAttributes="Bold" BorderWidth="2" BorderColor="#903AF0"/>
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="15"  Margin="0,0,0,15" HorizontalOptions="Center">
+                <Button ImageSource="trash_icon.svg"
+                        x:Name="btnDelete"
+                        Text="Delete"
+                        FontSize="15"
+                        FontAttributes="Bold" BackgroundColor="#9B1111" BorderColor="#E80000" BorderWidth="2"
+                        Command="{Binding DeleteItemCommand}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        
     </Grid>
 </ContentPage>
     

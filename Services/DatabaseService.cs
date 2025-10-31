@@ -41,10 +41,12 @@ namespace FastQuizMAUI.Services
             };
             await _database.InsertAllAsync(itemsCategories);
         }
+
         public async Task<BoxModel[]> GetBoxesAsync()
         {
             return await _database.Table<BoxModel>().ToArrayAsync();
         }
+
         //Guardar(Insertar o Actualizar) un item
         public async Task<int> SaveBoxAsync(BoxModel box)
         {
@@ -59,14 +61,17 @@ namespace FastQuizMAUI.Services
                 return await _database.InsertAsync(box);
             }
         }
+
         public async Task<ItemsBoxModel[]> GetItemsAsync(int boxId)
         {
             return await _database.Table<ItemsBoxModel>().Where(i => i.BoxId == boxId).ToArrayAsync();
         }
+
         public async Task<List<BoxCategoryModel>> GetBoxCategoriesAsync()
         {
             return await _database.Table<BoxCategoryModel>().ToListAsync();
         }
+
         // Obtener un item por ID
         public Task<ItemsBoxModel> GetItemAsync(int id)
         {
@@ -91,6 +96,14 @@ namespace FastQuizMAUI.Services
         public Task<int> DeleteItemAsync(ItemsBoxModel item)
         {
             return _database.DeleteAsync(item);
+        }
+
+        // Borrar todos los items de una lista
+        public Task<int> DeleteItemsAsync(List<int> itemsIdList)
+        {
+            return _database.Table<ItemsBoxModel>()
+                            .Where(x => itemsIdList.Contains(x.Id))
+                            .DeleteAsync();
         }
     }
 }

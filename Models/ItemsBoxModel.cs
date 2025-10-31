@@ -6,12 +6,17 @@ namespace FastQuizMAUI.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        [MaxLength(250)]
+        [MaxLength(300)]
         public string FrontText { get; set; }
-        [MaxLength(250)]
+        [MaxLength(300)]
         public string BackText { get; set; }
         public string Context{ get; set; }
         public int Level { get; set; }
+        public bool isEnabled { get; set; }
         public int BoxId { get; set; }
+
+        [Ignore]
+        public bool isSelected { get; set; } = false;
+
     }
 }
