@@ -20,11 +20,18 @@ namespace FastQuizMAUI.ViewModels
         {
             _databaseService = databaseService;
         }
-
         public bool IsDataOutDated = false;
 
         [ObservableProperty]
         private ItemsBoxModel _itemToDisplay;
+
+        [ObservableProperty, NotifyPropertyChangedFor(nameof(ItemToDisplay))]
+        private bool _isEnabled;
+        
+        public void SetStatus()
+        {
+            IsEnabled = ItemToDisplay.IsEnabled;
+        }
 
         public async Task ReloadItem()
         {
@@ -52,6 +59,16 @@ namespace FastQuizMAUI.ViewModels
                 { "SelectedCard", ItemToDisplay }
             };
             await Shell.Current.GoToAsync(nameof(EditItemForm), parameters);
+        }
+
+        [RelayCommand]
+        private async Task ToggleStatus()
+        {
+            ItemToDisplay.IsEnabled = !IsEnabled;
+            IsEnabled = !IsEnabled;
+            
+
+            await _databaseService.UpdateItemAsync(ItemToDisplay);
         }
 
     }

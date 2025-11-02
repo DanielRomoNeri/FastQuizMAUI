@@ -10,17 +10,25 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:CircleIconLevelConverter x:Key="CircleIconLevelConverter" />
+            <converter:EnabledDisabledConverter x:Key="EnabledDisabledConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="Auto, * , Auto, Auto" Padding="20,10">
-        <HorizontalStackLayout>
-            <Image Source="{Binding ItemToDisplay.Level, Converter={StaticResource CircleIconLevelConverter}}" Margin="0,0,10,0"/>
+        <Grid ColumnDefinitions="*,*">
+            <HorizontalStackLayout Grid.Column="0">
+                <Image Source="{Binding ItemToDisplay, Converter={StaticResource CircleIconLevelConverter}}" Margin="0,0,10,0"/>
 
-            <Label Text="{Binding ItemToDisplay.Level, StringFormat='Mastery Level: {0}/100'}" 
-                   VerticalOptions="Center"
-                   FontAttributes="Bold"/>
-
-        </HorizontalStackLayout>
+                <Label Text="{Binding ItemToDisplay.Level, StringFormat='Mastery Level: {0}/100'}" 
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+                
+            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End">
+                <Label Text="{Binding IsEnabled, Converter={StaticResource EnabledDisabledConverter}, StringFormat='Status: {0}'}" 
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+        </Grid>
         <Border Grid.Row="1"
                 x:Name="borderFrontCard"
                 Stroke="#5398F3"
@@ -75,25 +83,28 @@
                         FontSize="15"
                         FontAttributes="Bold" BackgroundColor="#0B782D" BorderColor="#3AEB64" BorderWidth="2"
                         Command="{Binding OpenEditFormCommand}"/>
-                <Button ImageSource="edit_icon.svg"
-                         Text="Disable"
-                         FontSize="15"
-                         FontAttributes="Bold" BackgroundColor="#3F3F3F" BorderColor="#575757" BorderWidth="2"
-                         Command="{Binding OpenEditFormCommand}"/>
+                
 
                 <Button ImageSource="reset_level_icon.svg"
                         Text="Reset"
                         FontSize="15"
                         FontAttributes="Bold" BorderWidth="2" BorderColor="#903AF0"/>
-
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="15"  Margin="0,0,0,15" HorizontalOptions="Center">
+                
                 <Button ImageSource="trash_icon.svg"
                         x:Name="btnDelete"
                         Text="Delete"
                         FontSize="15"
                         FontAttributes="Bold" BackgroundColor="#9B1111" BorderColor="#E80000" BorderWidth="2"
                         Command="{Binding DeleteItemCommand}"/>
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="15"  Margin="0,0,0,15" HorizontalOptions="Center">
+
+                <Button ImageSource="disabled_icon.svg"
+                        Text="Disable / Enable"
+                        FontSize="15"
+                        FontAttributes="Bold" BackgroundColor="#2E798E" BorderColor="#299E9C" BorderWidth="2"
+                        Command="{Binding ToggleStatusCommand}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
         

@@ -22,6 +22,7 @@ public partial class ItemDetailPage : ContentPage
         {
             await _itemDetailVM.ReloadItem();
         }
+        _itemDetailVM.SetStatus();
     }
 
     private async void borderFrontCard_Tapped(object sender, TappedEventArgs e)

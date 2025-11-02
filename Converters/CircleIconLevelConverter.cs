@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FastQuizMAUI.Models;
 
 namespace FastQuizMAUI.Converters
 {
@@ -11,17 +12,15 @@ namespace FastQuizMAUI.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if(value is int level)
+            if (value is ItemsBoxModel item)
             {
-                if (level != 0)
+                if (!item.IsEnabled)
                 {
-                    return "white_circle.svg";
-                }
-                else if (level >= 0 && level <= 5)
+                    return "disabled_circle.svg";
+                }else if(item.Level < 30)
                 {
                     return "red_circle.svg";
-                }
-                else if (level > 5 && level <= 10)
+                }else if(item.Level >= 30 || item.Level < 70)
                 {
                     return "orange_circle.svg";
                 }
@@ -30,11 +29,8 @@ namespace FastQuizMAUI.Converters
                     return "green_circle.svg";
                 }
             }
-            else
-            {
-                return "white_circle.svg";
-            }
-            
+            return null;
+
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

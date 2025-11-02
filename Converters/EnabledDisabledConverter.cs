@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace FastQuizMAUI.Converters
 {
-    class CheckedIconConverter : IValueConverter
+    public class EnabledDisabledConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-        
-            return (bool)value ? "checked_icon.svg" : "unchecked_icon.svg";
-        
+            return (bool)value ? "Active" : "Disabled";
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

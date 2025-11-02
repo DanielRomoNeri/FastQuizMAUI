@@ -47,7 +47,7 @@
                                 MaximumHeightRequest="120">
 
                             <Grid RowDefinitions=".5*,.5*" RowSpacing="3">
-                                <Image Source="{Binding Level, Converter={StaticResource CircleIconLevelConverter}}" 
+                                <Image Source="{Binding ., Converter={StaticResource CircleIconLevelConverter}}" 
                                        VerticalOptions="Start" 
                                        HorizontalOptions="End" 
                                        HeightRequest="15"/>
@@ -98,23 +98,23 @@
         <Grid ColumnDefinitions="*, Auto" Grid.Row="3" Padding="20, 10">
 
             <Button Grid.Column="0"
-            Text="Start Quiz"
-            TextColor="White" 
-            BackgroundColor="#1E90FF"  
-            CornerRadius="30"        
-            FontSize="20"            
-            FontAttributes="Bold"    
-            Margin="0,0,15,0"        
-            BorderColor="#1C86EE"    
-            BorderWidth="2"/>
+                    Text="Quiz"
+                    TextColor="White" 
+                    BackgroundColor="#1E90FF"  
+                    CornerRadius="30"        
+                    FontSize="20"            
+                    FontAttributes="Bold"    
+                    Margin="0,0,15,0"        
+                    BorderColor="#1C86EE"    
+                    BorderWidth="2"/>
             <Button Grid.Column="1"
-            ImageSource="plus_white.svg"
-            CornerRadius="15"          
-            WidthRequest="60"           
-            Margin="15,0,0,0"          
-            BorderColor="#8846DF"      
-            BorderWidth="2"           
-            Command="{Binding OpenAddItemFormCommand}"/>
+                    ImageSource="plus_white.svg"
+                    CornerRadius="15"          
+                    WidthRequest="60"           
+                    Margin="15,0,0,0"          
+                    BorderColor="#8846DF"      
+                    BorderWidth="2"           
+                    Command="{Binding OpenAddItemFormCommand}"/>
         </Grid>
 
 

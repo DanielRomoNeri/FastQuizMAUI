@@ -79,6 +79,7 @@ namespace FastQuizMAUI.ViewModels
                     item.isSelected = false;
                 }
                 selectedItemsIdList.Clear();
+                ShowTrashIcon = false;
             }
         }
         [RelayCommand]
@@ -114,11 +115,16 @@ namespace FastQuizMAUI.ViewModels
                 return;
 
             }
-            await _databaseService.DeleteItemsAsync(selectedItemsIdList);
-            await LoadItemsInBoxAsync();
-            // Clear selection and exit selection mode
-            selectedItemsIdList.Clear();
-            IsSelectedMode = false;
+            if (await Shell.Current.DisplayAlert("Delete", $"Do you really want to delete {selectedItemsIdList.Count} items?", "Yes", "No"))
+            {
+                await _databaseService.DeleteItemsAsync(selectedItemsIdList);
+                await LoadItemsInBoxAsync();
+                // Clear selection and exit selection mode
+                selectedItemsIdList.Clear();
+                IsSelectedMode = false;
+                ShowTrashIcon = false;
+            }
+            
         }
     }
 
