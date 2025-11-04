@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             xmlns:converter="clr-namespace:FastQuizMAUI.Converters"
+             x:DataType="vm:QuizGameVM"
+             x:Class="FastQuizMAUI.Pages.QuizGamePage"
+             Title="QuizGamePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CircleIconLevelConverter x:Key="CircleIconLevelConverter" />
+            <converter:EnabledDisabledConverter x:Key="EnabledDisabledConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="* , Auto" Padding="20,10">
+        
+        <Border Grid.Row="0"
+             x:Name="borderFrontCard"
+             Stroke="#5398F3"
+             StrokeThickness="3"
+             StrokeShape="RoundRectangle 20"
+             Margin="30, 50,30,50" BackgroundColor="#1140A5">
+
+            <Label Text="{Binding CurrentItem.FrontText}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="#FFFFFF"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="borderFrontCard_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <Border Grid.Row="0"
+             x:Name="borderBackCard"
+             Scale="0.5"
+             RotationY="270"
+             Stroke="#5398F3"
+             StrokeThickness="3"
+             StrokeShape="RoundRectangle 20"
+             Margin="30, 50,30,50" BackgroundColor="#1140A5"
+             IsVisible="False">
+
+            <Label Text="{Binding CurrentItem.BackText}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="#FFFFFF"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="borderBackCard_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <!--<Label Grid.Row="1"
+            Text="{Binding ItemToDisplay.Context, StringFormat='Context: {0}'}"
+            Margin="0,0,0,50"
+            VerticalOptions="Start"
+            FontSize="15"
+            FontAttributes="Bold"/>-->
+ 
+        <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Grid.Row="3">
+
+            <Border Grid.Column="0"
+                    HeightRequest="150"
+                    WidthRequest="80"
+                    Padding="1"
+                    
+                    BackgroundColor="#616161">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="None" 
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           FontSize="17"/>
+                    <Label Text="I didn't know what the answer was"
+                           TextColor="White"
+                           FontSize="12"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+
+            </Border>
+            
+            <Border Grid.Column="1"
+                    HeightRequest="150"
+                    WidthRequest="80"
+                    Padding="1"
+                    
+                    BackgroundColor="IndianRed">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Hard" 
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           FontSize="17"/>
+                    <Label Text="I didn't get the exact answer, but I was very close"
+                           TextColor="White"
+                           FontSize="12"
+                           
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                
+            </Border>
+            <Border Grid.Column="2"
+                    HeightRequest="150"
+                    WidthRequest="80"
+                    Padding="1"
+                    
+                    BackgroundColor="CornflowerBlue">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Medium" 
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           FontSize="17"/>
+                    <Label Text="I struggled to find the answer, but I figured it out"
+                           TextColor="White"
+                           FontSize="12"
+                           
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                
+            </Border>
+            <Border Grid.Column="3"
+                    HeightRequest="150"
+                    WidthRequest="80"
+                    Padding="1"
+                    BackgroundColor="MediumSeaGreen">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Easy" 
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           FontSize="17"/>
+                    <Label Text="It took me less than 5 seconds to figure out the answer"
+                           TextColor="White"
+                           FontSize="12"
+                           
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                
+            </Border>
+
+        </Grid>
+  
+
+    </Grid>
+</ContentPage>

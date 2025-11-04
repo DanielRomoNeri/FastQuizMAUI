@@ -106,7 +106,8 @@
                     FontAttributes="Bold"    
                     Margin="0,0,15,0"        
                     BorderColor="#1C86EE"    
-                    BorderWidth="2"/>
+                    BorderWidth="2"
+                    Command="{Binding StartQuizGameCommand}"/>
             <Button Grid.Column="1"
                     ImageSource="plus_white.svg"
                     CornerRadius="15"          

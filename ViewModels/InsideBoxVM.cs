@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FastQuizMAUI.Models;
+using FastQuizMAUI.Pages;
 using FastQuizMAUI.Services;
 
 namespace FastQuizMAUI.ViewModels
@@ -65,7 +66,7 @@ namespace FastQuizMAUI.ViewModels
             {
                 { "SelectedCard", item }
             };
-            await Shell.Current.GoToAsync(nameof(Pages.ItemDetailPage), navigationParameter);
+            await Shell.Current.GoToAsync(nameof(ItemDetailPage), navigationParameter);
         }
         [RelayCommand]
         private void ToggleSelectionMode()
@@ -125,6 +126,16 @@ namespace FastQuizMAUI.ViewModels
                 ShowTrashIcon = false;
             }
             
+        }
+        [RelayCommand]
+        private async Task StartQuizGameAsync()
+        {
+            var itemsToQuiz = ItemsInBox.Where(item => item.IsEnabled).ToArray();
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "ItemstoQuiz", itemsToQuiz }
+            };
+            await Shell.Current.GoToAsync(nameof(QuizGamePage), navigationParameter);
         }
     }
 
