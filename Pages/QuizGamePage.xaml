@@ -13,14 +13,27 @@
             <converter:EnabledDisabledConverter x:Key="EnabledDisabledConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid RowDefinitions="* , Auto" Padding="20,10">
-        
-        <Border Grid.Row="0"
+    <Grid RowDefinitions="Auto, Auto, Auto , Auto, Auto" Padding="20,10">
+
+        <Grid ColumnDefinitions="*" Grid.Row="0">
+            <Label Grid.Column="0" 
+                   Text="1/21"
+                   HorizontalOptions="End"
+                   FontSize="18"
+                   FontAttributes="Bold"/>
+        </Grid>
+        <Label Grid.Row="1" 
+               Text="Tap to show answer"
+               HorizontalOptions="Center"
+               Margin="0,70,0,10"
+               FontSize="15"/>
+        <Border Grid.Row="2"
              x:Name="borderFrontCard"
              Stroke="#5398F3"
              StrokeThickness="3"
              StrokeShape="RoundRectangle 20"
-             Margin="30, 50,30,50" BackgroundColor="#1140A5">
+             HeightRequest="450"
+             Margin="30,0,30,50" BackgroundColor="#1140A5">
 
             <Label Text="{Binding CurrentItem.FrontText}"
                 VerticalOptions="Center"
@@ -34,14 +47,15 @@
                 <TapGestureRecognizer Tapped="borderFrontCard_Tapped"/>
             </Border.GestureRecognizers>
         </Border>
-        <Border Grid.Row="0"
+        <Border Grid.Row="2"
              x:Name="borderBackCard"
              Scale="0.5"
              RotationY="270"
              Stroke="#5398F3"
              StrokeThickness="3"
              StrokeShape="RoundRectangle 20"
-             Margin="30, 50,30,50" BackgroundColor="#1140A5"
+             HeightRequest="450"
+             Margin="30,0,30,50" BackgroundColor="#1140A5"
              IsVisible="False">
 
             <Label Text="{Binding CurrentItem.BackText}"
@@ -56,14 +70,14 @@
                 <TapGestureRecognizer Tapped="borderBackCard_Tapped"/>
             </Border.GestureRecognizers>
         </Border>
-        <!--<Label Grid.Row="1"
+        <!--<Label Grid.Row="3"
             Text="{Binding ItemToDisplay.Context, StringFormat='Context: {0}'}"
             Margin="0,0,0,50"
             VerticalOptions="Start"
             FontSize="15"
             FontAttributes="Bold"/>-->
  
-        <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Grid.Row="3">
+        <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Grid.Row="4" IsVisible="False">
 
             <Border Grid.Column="0"
                     HeightRequest="150"
