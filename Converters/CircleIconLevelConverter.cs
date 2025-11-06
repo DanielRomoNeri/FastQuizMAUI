@@ -20,13 +20,17 @@ namespace FastQuizMAUI.Converters
                 }else if(item.Level < 30)
                 {
                     return "red_circle.svg";
-                }else if(item.Level >= 30 || item.Level < 70)
+                }else if(item.Level >= 30 && item.Level < 70)
                 {
                     return "orange_circle.svg";
                 }
-                else
+                else if(item.Level >= 70 && item.Level < 100)
                 {
                     return "green_circle.svg";
+                }
+                else
+                {
+                    return "crown_level.svg";
                 }
             }
             return null;

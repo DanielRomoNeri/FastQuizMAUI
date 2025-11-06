@@ -10,7 +10,22 @@ public partial class QuizGamePage : ContentPage
 	{
 		InitializeComponent();
         _quizGameVM = quizGameVM;
+        _quizGameVM.ResetCardPos += (s, e) => ResetCardPos();
         BindingContext = _quizGameVM;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _quizGameVM.Initialize();
+    }   
+    private void ResetCardPos()
+    {
+        borderFrontCard.RotationY = 0;
+        borderBackCard.RotationY = 270;
+        borderFrontCard.Scale = 1;
+        borderBackCard.Scale = 0.5;
+        borderFrontCard.IsVisible = true;
+        borderBackCard.IsVisible = false;
     }
     private async void borderFrontCard_Tapped(object sender, TappedEventArgs e)
     {
@@ -20,6 +35,7 @@ public partial class QuizGamePage : ContentPage
         borderBackCard.IsVisible = true;
         await borderBackCard.RotateYTo(360, 150, Easing.Linear);
         await borderBackCard.ScaleTo(1, 100);
+        _quizGameVM.ShowDifficultySelectionCommand.Execute(null);
 
     }
 

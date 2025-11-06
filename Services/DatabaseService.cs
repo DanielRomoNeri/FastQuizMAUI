@@ -37,6 +37,7 @@ namespace FastQuizMAUI.Services
             {
                 new BoxCategoryModel { Category = "Definition" },
                 new BoxCategoryModel { Category = "Translation" },
+                new BoxCategoryModel { Category = "Questions" },
                 new BoxCategoryModel { Category = "Other" },
             };
             await _database.InsertAllAsync(itemsCategories);

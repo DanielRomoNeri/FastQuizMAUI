@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FastQuizMAUI.ViewModels"
+             xmlns:model="clr-namespace:FastQuizMAUI.Models"
+             x:DataType="vm:QuizOptionVM"
+             x:Class="FastQuizMAUI.Pages.QuizOptionsPage"
+             Title="QuizOptionsPage">
+    <Border 
+     VerticalOptions="Center"
+     Margin="20"
+     Stroke="Black"
+     StrokeShape="RoundRectangle 15"
+     BackgroundColor="White">
+        <VerticalStackLayout Padding="50,5" Spacing="15" Margin="0,20">
+            <Label Text="Quiz Options"
+                   HorizontalOptions="Center"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+            <VerticalStackLayout RadioButtonGroup.SelectedValue="{Binding SelectedOption.Order}">
+                <Label 
+                 Text="Order"
+                 FontSize="18"/>
+                <RadioButton Content="Random"
+                             Value="1"/>
+                <RadioButton Content="Partially random (prioritizing lower levels) "
+                             Value="2"/>
+                <RadioButton Content="Consecutive"
+                             Value="3"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout RadioButtonGroup.SelectedValue="{Binding SelectedOption.Qty}">
+                <Label 
+                 Text="Number of flashcards"
+                 FontSize="18"/>
+                <RadioButton Content="Total flashcards"
+                             Value="1"/>
+                <RadioButton Content="30"
+                             Value="2"/>
+                <RadioButton Content="50"
+                             Value="3"/>
+                <RadioButton Content="100"
+                             Value="3"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                 Text="Show flashcard context"
+                 FontSize="18"/>
+                <Switch HorizontalOptions="Start"
+                        IsToggled="{Binding SelectedOption.ShowContext}"/>
+            </VerticalStackLayout>
+            <Button Text="Start Quiz"
+                    CornerRadius="20"
+                    Command="{Binding StartQuizCommand}"/>
+
+        </VerticalStackLayout>
+        <Border.Shadow>
+            <Shadow 
+             Brush="Black"
+             Opacity="0.4"
+             Radius="15"
+             />
+        </Border.Shadow>
+    </Border>
+</ContentPage>

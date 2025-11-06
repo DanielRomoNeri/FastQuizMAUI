@@ -35,7 +35,9 @@ namespace FastQuizMAUI
                 .AddTransient<EditItemForm>()
                 .AddTransient<EditItemFormVM>()
                 .AddTransient<QuizGamePage>()
-                .AddTransient<QuizGameVM>();
+                .AddTransient<QuizGameVM>()
+                .AddTransient<QuizOptionsPage>()
+                .AddTransient<QuizOptionVM>();
             return builder.Build();
         }
     }

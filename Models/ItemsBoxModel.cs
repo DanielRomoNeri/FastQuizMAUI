@@ -15,7 +15,7 @@ namespace FastQuizMAUI.Models
         public string Context{ get; set; }
         public int Level { get; set; } = 30;
         public int BoxId { get; set; }
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; } = true;
 
         private bool _isSelected = false;
 

@@ -133,10 +133,11 @@ namespace FastQuizMAUI.ViewModels
             var itemsToQuiz = ItemsInBox.Where(item => item.IsEnabled).ToArray();
             var navigationParameter = new Dictionary<string, object>
             {
-                { "ItemstoQuiz", itemsToQuiz }
+                { "ItemsToQuiz", itemsToQuiz }
             };
-            await Shell.Current.GoToAsync(nameof(QuizGamePage), navigationParameter);
+            await Shell.Current.GoToAsync(nameof(QuizOptionsPage), navigationParameter);
         }
+        
     }
 
 }

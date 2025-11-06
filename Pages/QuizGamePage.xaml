@@ -17,7 +17,7 @@
 
         <Grid ColumnDefinitions="*" Grid.Row="0">
             <Label Grid.Column="0" 
-                   Text="1/21"
+                   Text="{Binding CountFormat}"
                    HorizontalOptions="End"
                    FontSize="18"
                    FontAttributes="Bold"/>
@@ -25,14 +25,14 @@
         <Label Grid.Row="1" 
                Text="Tap to show answer"
                HorizontalOptions="Center"
-               Margin="0,70,0,10"
+               Margin="0,20,0,10"
                FontSize="15"/>
         <Border Grid.Row="2"
              x:Name="borderFrontCard"
              Stroke="#5398F3"
              StrokeThickness="3"
              StrokeShape="RoundRectangle 20"
-             HeightRequest="450"
+             HeightRequest="430"
              Margin="30,0,30,50" BackgroundColor="#1140A5">
 
             <Label Text="{Binding CurrentItem.FrontText}"
@@ -54,7 +54,7 @@
              Stroke="#5398F3"
              StrokeThickness="3"
              StrokeShape="RoundRectangle 20"
-             HeightRequest="450"
+             HeightRequest="430"
              Margin="30,0,30,50" BackgroundColor="#1140A5"
              IsVisible="False">
 
@@ -77,7 +77,7 @@
             FontSize="15"
             FontAttributes="Bold"/>-->
  
-        <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Grid.Row="4" IsVisible="False">
+        <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Grid.Row="4" IsVisible="{Binding IsBackTextActive}">
 
             <Border Grid.Column="0"
                     HeightRequest="150"
@@ -96,7 +96,9 @@
                            FontSize="12"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetNewLevelCommand}" CommandParameter="-10" />
+                </Border.GestureRecognizers>
             </Border>
             
             <Border Grid.Column="1"
@@ -117,7 +119,9 @@
                            
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetNewLevelCommand}" CommandParameter="5" />
+                </Border.GestureRecognizers>
             </Border>
             <Border Grid.Column="2"
                     HeightRequest="150"
@@ -137,7 +141,9 @@
                            
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetNewLevelCommand}" CommandParameter="10" />
+                </Border.GestureRecognizers>
             </Border>
             <Border Grid.Column="3"
                     HeightRequest="150"
@@ -156,7 +162,9 @@
                            
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetNewLevelCommand}" CommandParameter="15" />
+                </Border.GestureRecognizers>
             </Border>
 
         </Grid>
