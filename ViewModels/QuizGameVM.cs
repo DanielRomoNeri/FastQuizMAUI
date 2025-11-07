@@ -10,7 +10,7 @@ using FastQuizMAUI.Services;
 
 namespace FastQuizMAUI.ViewModels
 {
-    [QueryProperty(nameof(Options), "SelectedOptions")]
+    [QueryProperty(nameof(Options), "Options")]
     public partial class QuizGameVM : ObservableObject
     {
         private readonly DatabaseService _databaseService;
@@ -24,35 +24,26 @@ namespace FastQuizMAUI.ViewModels
         public async Task Initialize()
         {
             ItemsToQuiz = Options.Items;
-
             for (int i = 0; i < ItemsToQuiz.Length; i++)
             {
                 indexLeft.Add(i);
             }
-            if (Options.Qty == 1)
-            {
-                quantityOption = ItemsToQuiz.Length;
-            }
-            else if (Options.Qty == 2)
-            {
-                quantityOption = 30;
-            }
-            else if (Options.Qty == 3)
-            {
-                quantityOption = 50;
-            }
-            else if (Options.Qty == 4)
-            {
-                quantityOption = 100;
-            }
+            SetFlashcardsCount();
+            SetFlashCardsOrder();
             await SetNewCard();
 
         }
 
         public EventHandler ResetCardPos;
-        private OptionsModel Options = new();
-        private int quantityOption = 1;
-        public string CountFormat => $"{CardsCount}/{quantityOption}";
+
+        private List<ItemsBoxModel> SortedFLashcardsList = [];
+
+        [ObservableProperty]
+        private OptionsModel _options = new();
+
+        [ObservableProperty, NotifyPropertyChangedFor(nameof(CountFormat))]
+        private int _quantityOption;
+        public string CountFormat => $"{CardsCount}/{QuantityOption}";
 
         [ObservableProperty, NotifyPropertyChangedFor(nameof(CountFormat))]
         private int _cardsCount;
@@ -66,19 +57,77 @@ namespace FastQuizMAUI.ViewModels
         [ObservableProperty]
         private ItemsBoxModel _currentItem;
 
+        private void SetFlashCardsOrder()
+        {
+            if (Options.Order == 1)
+            {
+                SortedFLashcardsList = ItemsToQuiz.OrderBy(i => i.Level).ToList();
+            }
+            else
+            {
+                SortedFLashcardsList = ItemsToQuiz.ToList();
+            }
+        }
+        private void SetFlashcardsCount()
+        {
+
+            if (Options.Qty == 0)
+            {
+                QuantityOption = ItemsToQuiz.Length;
+            }
+            else if (Options.Qty == 1)
+            {
+                QuantityOption = 30;
+            }
+            else if (Options.Qty == 2)
+            {
+                QuantityOption = 50;
+            }
+            else if (Options.Qty == 3)
+            {
+                QuantityOption = 100;
+            }
+        }
         [RelayCommand]
         private async Task SetNewCard()
         {
+
             IsBackTextActive = false;
             ResetCardPos?.Invoke(this, EventArgs.Empty);
-            if (indexLeft.Count > 0)
+
+            if (CardsCount + 1 <= QuantityOption)
             {
-                int randomIndexFromList = random.Next(0, indexLeft.Count);
+                CardsCount++;
+                if (Options.Order == 0)
+                {
 
-                int indexItem = indexLeft[randomIndexFromList];
+                    if (indexLeft.Count == 0)
+                    {
+                        for (int i = 0; i < ItemsToQuiz.Length; i++)
+                        {
+                            indexLeft.Add(i);
+                        }
+                        
+                    }
+                    int randomIndexFromList = random.Next(0, indexLeft.Count);
 
-                CurrentItem = ItemsToQuiz[indexItem];
-                indexLeft.RemoveAt(randomIndexFromList);
+                    int indexItem = indexLeft[randomIndexFromList];
+
+                    CurrentItem = SortedFLashcardsList[indexItem];
+                    indexLeft.RemoveAt(randomIndexFromList);
+                }
+                else
+                {
+                    if (SortedFLashcardsList.Count == 0)
+                    {
+                        SetFlashCardsOrder();
+                        
+
+                    }
+                    CurrentItem = SortedFLashcardsList[0];
+                    SortedFLashcardsList.RemoveAt(0);
+                }
+
             }
             else
             {
@@ -86,12 +135,14 @@ namespace FastQuizMAUI.ViewModels
                 await Shell.Current.GoToAsync("..");
             }
 
+
+
+
         }
         [RelayCommand]
         private async Task SetNewLevel(string points)
         {
             int pointsInt = int.Parse(points);
-            CardsCount++;
             CurrentItem.Level += pointsInt;
             if (CurrentItem.Level < 0)
             {

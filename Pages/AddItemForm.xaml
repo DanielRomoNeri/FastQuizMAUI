@@ -135,7 +135,8 @@
                          FontSize="20"
                          HorizontalOptions="Center"
                          CornerRadius="30"
-                         BackgroundColor="IndianRed"/>
+                         BackgroundColor="IndianRed"
+                        Clicked="btnCancel_Clicked"/>
                     <Button
                          x:Name="btnSave"
                          Grid.Column="1"

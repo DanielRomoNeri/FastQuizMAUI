@@ -17,36 +17,59 @@
                    HorizontalOptions="Center"
                    FontSize="20"
                    FontAttributes="Bold"/>
-            <VerticalStackLayout RadioButtonGroup.SelectedValue="{Binding SelectedOption.Order}">
+            <VerticalStackLayout RadioButtonGroup.SelectedValue="{Binding OrderValue}" RadioButtonGroup.GroupName="OrderGroup">
                 <Label 
                  Text="Order"
                  FontSize="18"/>
                 <RadioButton Content="Random"
-                             Value="1"/>
-                <RadioButton Content="Partially random (prioritizing lower levels) "
-                             Value="2"/>
-                <RadioButton Content="Consecutive"
-                             Value="3"/>
+                             IsChecked="True">
+                    <RadioButton.Value>
+                        <x:Int32>0</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
+                <RadioButton Content="Prioritize low flashcards levels">
+                    <RadioButton.Value>
+                        <x:Int32>1</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
+                <RadioButton Content="Consecutive">
+                    <RadioButton.Value>
+                        <x:Int32>2</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
             </VerticalStackLayout>
-            <VerticalStackLayout RadioButtonGroup.SelectedValue="{Binding SelectedOption.Qty}">
+            <VerticalStackLayout RadioButtonGroup.SelectedValue="{Binding QuantityValue}" RadioButtonGroup.GroupName="QuantityGroup">
                 <Label 
                  Text="Number of flashcards"
                  FontSize="18"/>
                 <RadioButton Content="Total flashcards"
-                             Value="1"/>
-                <RadioButton Content="30"
-                             Value="2"/>
-                <RadioButton Content="50"
-                             Value="3"/>
-                <RadioButton Content="100"
-                             Value="3"/>
+                             IsChecked="True">
+                    <RadioButton.Value>
+                        <x:Int32>0</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
+                <RadioButton Content="30">
+                    <RadioButton.Value>
+                        <x:Int32>1</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
+                <RadioButton Content="50">
+                    <RadioButton.Value>
+                        <x:Int32>2</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
+                <RadioButton Content="100">
+                    <RadioButton.Value>
+                        <x:Int32>3</x:Int32>
+                    </RadioButton.Value>
+                </RadioButton>
             </VerticalStackLayout>
             <VerticalStackLayout>
                 <Label 
                  Text="Show flashcard context"
                  FontSize="18"/>
                 <Switch HorizontalOptions="Start"
-                        IsToggled="{Binding SelectedOption.ShowContext}"/>
+                        IsToggled="{Binding ShowContext}"/>
             </VerticalStackLayout>
             <Button Text="Start Quiz"
                     CornerRadius="20"

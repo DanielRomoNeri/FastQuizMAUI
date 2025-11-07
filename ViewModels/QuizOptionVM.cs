@@ -24,15 +24,25 @@ namespace FastQuizMAUI.ViewModels
         private ItemsBoxModel[] _itemsToQuiz;
 
         [ObservableProperty]
-        private OptionsModel _selectedOption = new();
+        private int _orderValue;
+        [ObservableProperty]
+        private int _quantityValue;
+        [ObservableProperty]
+        private bool _showContext;
 
         [RelayCommand]
         private async Task StartQuizAsync()
         {
-            SelectedOption.Items = ItemsToQuiz;
+            var SelectedOptions = new OptionsModel
+            {
+                Items = ItemsToQuiz,
+                Order = OrderValue,
+                Qty = QuantityValue,
+                ShowContext = ShowContext
+            };
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Options", SelectedOption }
+                { "Options", SelectedOptions }
             };
             await Shell.Current.GoToAsync(nameof(QuizGamePage), navigationParameter);
         }

@@ -37,4 +37,9 @@ public partial class AddItemForm : ContentPage
     {
         await Navigation.PopModalAsync();
     }
+
+    private void btnCancel_Clicked(object sender, EventArgs e)
+    {
+        CloseForm();
+    }
 }
