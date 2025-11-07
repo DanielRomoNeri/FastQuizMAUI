@@ -17,6 +17,7 @@ namespace FastQuizMAUI.Services
         {
             //await _database.DropTableAsync<BoxModel>();
             //await _database.DropTableAsync<ItemsBoxModel>();
+            //await _database.DropTableAsync<BoxCategoryModel>();
             await _database.CreateTableAsync<BoxModel>();
             await _database.CreateTableAsync<ItemsBoxModel>();
             await _database.CreateTableAsync<BoxCategoryModel>();
